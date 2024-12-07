@@ -1,0 +1,37 @@
+
+# Classe Base (Mãe)
+class Coleta:
+    def __init__(self):
+        self.historico = []
+
+    def verificar_residuo(self, tipo, quantidade):
+        """Método abstrato que deve ser implementado pela classe filha."""
+        raise NotImplementedError("Este método deve ser implementado na classe filha.")
+
+# Classe Derivada (Filha)
+class GerenciamentoColetaSeletiva(Coleta):
+    #lista com os nomes do residuos aceitos para coleta
+    TIPOS_VALIDOS = ["Plástico", "Vidro", "Metal", "Papel"]
+
+    #recebe o nome do residuo coletado e compara se é possivel de reciclagem ou não
+    def verificar_residuo(self, tipo, quantidade):
+        if tipo not in self.TIPOS_VALIDOS:
+            return f"Erro: Tipo de resíduo inválido."
+        if quantidade <= 0:
+            return "Erro: Quantidade inválida."
+        #adiciona residuo no historico para registro
+    
+        self.historico.append((tipo, quantidade))
+        return f"Histórico de Resíduos: {self.historico}"
+    
+
+# Exemplo de uso
+coleta = GerenciamentoColetaSeletiva()
+
+print(coleta.verificar_residuo("Plástico", 20))  # Registro válido
+print(coleta.verificar_residuo("Vidro", 15))     # Registro válido
+print(coleta.verificar_residuo("Metal", 10))     # Registro válido
+print(coleta.verificar_residuo("Orgânico", 5))   # Registro inválido (tipo não permitido)
+print(coleta.verificar_residuo("Papel", 30))     # Registro válido
+print(coleta.verificar_residuo("Óleo",10))
+print(coleta.verificar_residuo("Plástico", 20))
