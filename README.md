@@ -1,1 +1,1 @@
-#Sistema de gereciador de coleta
+#Sistema gerenciador de coleta
